@@ -637,6 +637,15 @@ class Resource(AuditModel, HierarchyModel):
     subcategory = models.CharField(
         _("subcategory"), max_length=300, null=True, blank=True, db_index=True
     )
+    owner = models.ForeignKey(
+        "self",
+        verbose_name=_("owner"),
+        null=True,
+        blank=True,
+        related_name="xchildren",
+        help_text=_("Hierarchical parent"),
+        on_delete=models.CASCADE,
+    )
     type = models.CharField(
         _("type"),
         max_length=20,
